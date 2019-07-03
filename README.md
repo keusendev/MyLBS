@@ -27,6 +27,8 @@ Next steps
 
 ![lbs](images/IMG_4381.png)
 
+---
+
 ![lbs](images/IMG_4387.png)
 
 ## Map showing registerd Geofences
@@ -37,17 +39,23 @@ Next steps
 
 ![lbs](images/IMG_4383.png)
 
+---
+
 ![lbs](images/IMG_4389.png)
 
 ## List of created Geofences
 
 ![lbs](images/IMG_4384.png)
 
+---
+
 ![lbs](images/IMG_4388.png)
 
 ## Settings view with mini console
 
 ![lbs](images/IMG_4385.png)
+
+---
 
 ![lbs](images/IMG_4386.png)
 
