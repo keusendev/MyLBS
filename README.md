@@ -50,9 +50,9 @@ Next steps
 ```json
 {
     "password": "demo",
-    "username": "alain",
+    "username": "hansli",
     "deviceId": "iPhone7",
-    "host": "es.keusen.me",
+    "host": "somehost.somedomain.sometld",
     "visitTrackingEnabled": true,
     "significantPositionTrackingEnabled": true
 }
