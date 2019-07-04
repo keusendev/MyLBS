@@ -1,6 +1,6 @@
 # My LBS Project
 
-# Idea
+## Idea
 
 Leveraging all three LBS modules from the Apple iOS ecosystem.
 
@@ -21,9 +21,9 @@ Next steps
 
 - Anything is now ready to push LBS infos to a server. In this case, I prefer Elasticsearch. Together with Kibana all the data can be easily analyzed then.
 
-# Screen shots
+## Screen shots
 
-## Overview of LBS events
+### Overview of LBS events
 
 ![lbs](images/IMG_4381.png)
 
@@ -31,11 +31,11 @@ Next steps
 
 ![lbs](images/IMG_4387.png)
 
-## Map showing registerd Geofences
+### Map showing registerd Geofences
 
 ![lbs](images/IMG_4382.png)
 
-## View for adding new Geofences
+### View for adding new Geofences
 
 ![lbs](images/IMG_4383.png)
 
@@ -43,7 +43,7 @@ Next steps
 
 ![lbs](images/IMG_4389.png)
 
-## List of created Geofences
+### List of created Geofences
 
 ![lbs](images/IMG_4384.png)
 
@@ -51,7 +51,7 @@ Next steps
 
 ![lbs](images/IMG_4388.png)
 
-## Settings view with mini console
+### Settings view with mini console
 
 ![lbs](images/IMG_4385.png)
 
@@ -59,9 +59,9 @@ Next steps
 
 ![lbs](images/IMG_4386.png)
 
-# JSON examples
+## JSON examples
 
-## Settings
+### Settings
 
 ```json
 {
@@ -74,7 +74,7 @@ Next steps
 }
 ```
 
-## Geofences
+### Geofences
 
 ```json
 [
@@ -99,9 +99,9 @@ Next steps
 ]
 ```
 
-## Events
+### Events
 
-### Geofences
+#### Geofence Events
 
 ```json
 [
@@ -128,7 +128,7 @@ Next steps
 ]
 ```
 
-### Visits
+#### Visit Events
 
 ```json
 [
@@ -159,7 +159,7 @@ Next steps
 ]
 ```
 
-### Positions
+#### Position Events
 
 ```json
 [
@@ -195,3 +195,11 @@ Next steps
     }
 ]
 ```
+
+## UI hierarchy
+
+![lbs](images/ib_all.png)
+
+### Detail
+
+![lbs](images/ib_detail.png)

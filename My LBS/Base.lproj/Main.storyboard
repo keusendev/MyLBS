@@ -598,7 +598,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JW5-SX-IqN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="2258"/>
+            <point key="canvasLocation" x="164" y="2302"/>
         </scene>
         <!--AddGeofenceNavController-->
         <scene sceneID="Iuw-uf-lOC">
@@ -619,7 +619,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N9G-VQ-cFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-260" y="2259"/>
+            <point key="canvasLocation" x="-588" y="2303"/>
         </scene>
         <!--LastPositionsNavController-->
         <scene sceneID="oz7-cw-Kus">
