@@ -25,11 +25,7 @@ Next steps
 
 ### Overview of LBS events
 
-![lbs](images/IMG_4381.png)
-
----
-
-![lbs](images/IMG_4387.png)
+![lbs](images/IMG_4381.png) | ![lbs](images/IMG_4387.png)
 
 ### Map showing registerd Geofences
 
@@ -37,27 +33,15 @@ Next steps
 
 ### View for adding new Geofences
 
-![lbs](images/IMG_4383.png)
-
----
-
-![lbs](images/IMG_4389.png)
+![lbs](images/IMG_4383.png) | ![lbs](images/IMG_4389.png)
 
 ### List of created Geofences
 
-![lbs](images/IMG_4384.png)
-
----
-
-![lbs](images/IMG_4388.png)
+![lbs](images/IMG_4384.png) | ![lbs](images/IMG_4388.png)
 
 ### Settings view with mini console
 
-![lbs](images/IMG_4385.png)
-
----
-
-![lbs](images/IMG_4386.png)
+![lbs](images/IMG_4385.png) | ![lbs](images/IMG_4386.png)
 
 ## JSON examples
 
