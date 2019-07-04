@@ -13,9 +13,10 @@ The main challenge was to get used to the iOS ecosystem. Since it was the first 
 Further features:
 
 - All data is persitet as JSON (Done with Swift Codables)
-- Entries can be deleted and saved again
+- Entries can be deleted and saved and read-in again
 - Only low energy modes are used
 - User can select which modes should be used
+- Two user notification types (popup in-app and normal push notification)
 
 Next steps
 
