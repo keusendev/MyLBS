@@ -120,7 +120,7 @@ class EventsTableViewController: UITableViewController {
                 visitEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(visitEvent.isUploaded)"
                 visitEventTableViewCell.arrivalDateLabel.text = "Arrival: \(dateformatter.string(from: visitEvent.arrivalDate))"
                 visitEventTableViewCell.departureDateLabel.text = "Departure: \(dateformatter.string(from: visitEvent.departureDate))"
-                visitEventTableViewCell.durationLabel.text = "Duration: \(visitEvent.duration)"
+                visitEventTableViewCell.durationLabel.text = "Duration: \(humanReadableElapsedTime(seconds: visitEvent.duration))"
                 visitEventTableViewCell.coordinateLabel.text = coordinaterFormatter(coordinate: visitEvent.coordinate)
                 visitEventTableViewCell.horizontalAccuracyLabel.text = String(format: "Accuracy: %.3fm", visitEvent.horizontalAccuracy)
             }
@@ -137,7 +137,7 @@ class EventsTableViewController: UITableViewController {
                 positionEventTableViewCell.arrivalDateLabel.text = "Arrival: \(dateformatter.string(from: posEvent.arrivalDate))"
                 positionEventTableViewCell.coordinateLabel.text = coordinaterFormatter(coordinate: posEvent.coordinate)
                 positionEventTableViewCell.altitudeLabel.text = String(format: "Altitude: %.3fm", posEvent.altitude)
-                positionEventTableViewCell.courseLabel.text = "Course relative to North: \(posEvent.course)"
+                positionEventTableViewCell.courseLabel.text = String(format: "Course relative to North: %.3f degree", posEvent.course)
                 positionEventTableViewCell.floorLabel.text = "Floor in Building: \(posEvent.floor)"
                 positionEventTableViewCell.horizontalAccuracyLabel.text = String(format: "Accuracy horizontal: %.3fm", posEvent.horizontalAccuracy)
                 positionEventTableViewCell.verticalAccuracyLabel.text = String(format: "Accuracy vertical: %.3fm", posEvent.verticalAccuracy)

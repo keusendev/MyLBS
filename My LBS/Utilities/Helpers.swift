@@ -70,6 +70,7 @@ public func dateStringDecode<C>(forKey key: C.Key, from container: C, with forma
         throw DecodingError.dataCorruptedError(forKey: key, in: container, debugDescription: dateString)
 }
 
+// The app "red"
 public func appColorRed() -> UIColor {
     let red = 158
     let green = 39
@@ -82,3 +83,30 @@ public func appColorRed() -> UIColor {
     return UIColor(red: redPart, green: greenPart, blue: bluePart, alpha: alphaPart)
 }
 
+// Pretty print time in seconds data
+public func humanReadableElapsedTime(seconds: Double) -> String {
+    let oneMinute: Double = 60
+    let oneHour: Double = oneMinute * 60
+    let oneDay: Double = oneHour * 24
+    
+    let numD = (seconds / oneDay).rounded(.towardZero)
+    let numH = ((seconds - numD * oneDay) / oneHour).rounded(.towardZero)
+    let numM = ((seconds - numD * oneDay - numH * oneHour) / oneMinute).rounded(.towardZero)
+    let numS = (seconds - numD * oneDay - numH * oneHour - numM * oneMinute).rounded(.towardZero)
+    
+    
+    if numD != 0 {
+        return String(format: "%1.0fd %1.0fh %1.0lfmin %1.0fs", numD, numH, numM, numS)
+    }
+    if numH != 0 {
+        return String(format: "%1.0fh %1.0lfmin %1.0fs", numH, numM, numS)
+    }
+    if numM != 0 {
+        return String(format: "%1.0lfmin %1.0fs", numM, numS)
+    }
+    if numS != 0 {
+        return String(format: "%1.0fs", numS)
+    }
+    
+    return "0s"
+}
