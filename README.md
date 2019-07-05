@@ -26,9 +26,9 @@ Next steps
 
 ### Overview of LBS events
 
-![lbs](images/IMG_4391.png) ![lbs](images/IMG_4392.png)
+![lbs](images/IMG_4394.png) ![lbs](images/IMG_4393.png) 
 
-![lbs](images/IMG_4393.png) ![lbs](images/IMG_4394.png)
+![lbs](images/IMG_4391.png) ![lbs](images/IMG_4392.png)
 
 ### Map showing registerd Geofences
 
