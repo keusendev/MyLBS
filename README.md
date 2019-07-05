@@ -25,7 +25,9 @@ Next steps
 
 ### Overview of LBS events
 
-![lbs](images/IMG_4381.png) ![lbs](images/IMG_4387.png)
+![lbs](images/IMG_4391.png) ![lbs](images/IMG_4392.png)
+
+![lbs](images/IMG_4393.png) ![lbs](images/IMG_4394.png)
 
 ### Map showing registerd Geofences
 
@@ -132,9 +134,9 @@ Next steps
         "addedDate": "2019-07-03T22:46:14.661+0200",
         "longitude": 7.4210439976063221,
         "horizontalAccuracy": 64,
-        "departureDate": "2019-07-03T22:41:10+0200",
+        "departureDate": null,
         "latitude": 46.920228909774131,
-        "duration": 784.68862497806549,
+        "duration": null,
         "isUploaded": false,
         "eventClassType": "Visit Event",
         "arrivalDate": "2019-07-03T22:28:06+0200",
