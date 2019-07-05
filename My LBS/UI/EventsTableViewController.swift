@@ -119,10 +119,17 @@ class EventsTableViewController: UITableViewController {
                 visitEventTableViewCell.addedDateLabel.text = "Date added: \(dateformatterMs.string(from: visitEvent.addedDate))"
                 visitEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(visitEvent.isUploaded)"
                 visitEventTableViewCell.arrivalDateLabel.text = "Arrival: \(dateformatter.string(from: visitEvent.arrivalDate))"
-                visitEventTableViewCell.departureDateLabel.text = "Departure: \(dateformatter.string(from: visitEvent.departureDate))"
-                visitEventTableViewCell.durationLabel.text = "Duration: \(humanReadableElapsedTime(seconds: visitEvent.duration))"
+                
+                if let departureDateSafe = visitEvent.departureDate {
+                    visitEventTableViewCell.departureDateLabel.text = "Departure: \(dateformatter.string(from: departureDateSafe))"
+                    visitEventTableViewCell.durationLabel.text = "Duration: \(humanReadableElapsedTime(seconds: visitEvent.duration!))"
+                } else {
+                    visitEventTableViewCell.departureDateLabel.text = "Departure: n/a"
+                    visitEventTableViewCell.durationLabel.text = "Duration: n/a"
+                }
+                
                 visitEventTableViewCell.coordinateLabel.text = coordinaterFormatter(coordinate: visitEvent.coordinate)
-                visitEventTableViewCell.horizontalAccuracyLabel.text = String(format: "Accuracy: %.3fm", visitEvent.horizontalAccuracy)
+                visitEventTableViewCell.horizontalAccuracyLabel.text = String(format: "Accuracy: %.1fm", visitEvent.horizontalAccuracy)
             }
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "PositionEventItem")!
@@ -136,12 +143,19 @@ class EventsTableViewController: UITableViewController {
                 positionEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(posEvent.isUploaded)"
                 positionEventTableViewCell.arrivalDateLabel.text = "Arrival: \(dateformatter.string(from: posEvent.arrivalDate))"
                 positionEventTableViewCell.coordinateLabel.text = coordinaterFormatter(coordinate: posEvent.coordinate)
-                positionEventTableViewCell.altitudeLabel.text = String(format: "Altitude: %.3fm", posEvent.altitude)
-                positionEventTableViewCell.courseLabel.text = String(format: "Course relative to North: %.3f degree", posEvent.course)
+                positionEventTableViewCell.altitudeLabel.text = String(format: "Altitude: %.1fm", posEvent.altitude)
+                positionEventTableViewCell.courseLabel.text = String(format: "Course relative to North: %.0f°N", posEvent.course)
                 positionEventTableViewCell.floorLabel.text = "Floor in Building: \(posEvent.floor)"
-                positionEventTableViewCell.horizontalAccuracyLabel.text = String(format: "Accuracy horizontal: %.3fm", posEvent.horizontalAccuracy)
-                positionEventTableViewCell.verticalAccuracyLabel.text = String(format: "Accuracy vertical: %.3fm", posEvent.verticalAccuracy)
-                positionEventTableViewCell.speedLabel.text = String(format: "Current speed: %.3fm/s", posEvent.speed)
+                positionEventTableViewCell.horizontalAccuracyLabel.text = String(format: "Accuracy horizontal: %.1fm", posEvent.horizontalAccuracy)
+                positionEventTableViewCell.verticalAccuracyLabel.text = String(format: "Accuracy vertical: %.1fm", posEvent.verticalAccuracy)
+                
+                var speed_mpers: Double = 0
+                var speed_kmh: Double = 0
+                if posEvent.speed > 0 {
+                    speed_mpers = posEvent.speed
+                    speed_kmh = posEvent.speed * 3.6
+                }
+                positionEventTableViewCell.speedLabel.text = String(format: "Current speed: %.2fm/s (%.1fkm/h)", speed_mpers, speed_kmh)
             }
         default: break
         }

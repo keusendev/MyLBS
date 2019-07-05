@@ -221,9 +221,24 @@ extension AppDelegate: CLLocationManagerDelegate {
     // Handle incoming CLVisits -> A CLVisit will be generated if the device stayed on a place for a certain time.
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
         let name = "Visit"
-        let duration: Double = visit.departureDate.timeIntervalSince(visit.arrivalDate)
         
-        let newVisitEvent = VisitEvent(name: name, arrivalDate: visit.arrivalDate, departureDate: visit.departureDate, duration: duration, coordinate: visit.coordinate, horizontalAccuracy: visit.horizontalAccuracy)
+        var departureDate: Date?
+        var duration: Double?
+        
+        if (visit.departureDate == Date.distantFuture) {
+            departureDate = nil
+            duration = nil
+        } else {
+            departureDate = visit.departureDate
+            duration = visit.departureDate.timeIntervalSince(visit.arrivalDate)
+        }
+        
+        let newVisitEvent = VisitEvent(name: name,
+                                       arrivalDate: visit.arrivalDate,
+                                       departureDate: departureDate,
+                                       duration: duration,
+                                       coordinate: visit.coordinate,
+                                       horizontalAccuracy: visit.horizontalAccuracy)
         
         let dateformatter = DateFormatter.iso8601
         let message = "New visit: \(dateformatter.string(from: newVisitEvent.arrivalDate))"

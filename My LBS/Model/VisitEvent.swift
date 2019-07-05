@@ -17,8 +17,8 @@ class VisitEvent: Codable {
     
     var name: String
     var arrivalDate: Date
-    var departureDate: Date
-    var duration: Double
+    var departureDate: Date?
+    var duration: Double?
     var coordinate: CLLocationCoordinate2D
     var horizontalAccuracy: CLLocationAccuracy
     var isUploaded: Bool
@@ -27,7 +27,7 @@ class VisitEvent: Codable {
 
     
     
-    init(name: String, arrivalDate: Date, departureDate: Date, duration: Double, coordinate: CLLocationCoordinate2D, horizontalAccuracy: CLLocationAccuracy, isUploaded: Bool = false, eventClassType: EventClassType = .visitEvent, addedDate: Date = Date()) {
+    init(name: String, arrivalDate: Date, departureDate: Date?, duration: Double?, coordinate: CLLocationCoordinate2D, horizontalAccuracy: CLLocationAccuracy, isUploaded: Bool = false, eventClassType: EventClassType = .visitEvent, addedDate: Date = Date()) {
         self.name = name
         self.arrivalDate = arrivalDate
         self.departureDate = departureDate
@@ -43,8 +43,21 @@ class VisitEvent: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         arrivalDate = try dateStringDecode(forKey: .arrivalDate, from: values, with: .iso8601)
-        departureDate = try dateStringDecode(forKey: .departureDate, from: values, with: .iso8601)
-        duration = try values.decode(Double.self, forKey: .duration)
+        
+        // departureDate = try dateStringDecode(forKey: .departureDate, from: values, with: .iso8601)
+        do {
+            try departureDate = dateStringDecode(forKey: .departureDate, from: values, with: .iso8601)
+        } catch {
+            departureDate = nil
+        }
+        
+        //duration = try values.decode(Double.self, forKey: .duration)
+        do {
+            try duration = values.decode(Double.self, forKey: .duration)
+        } catch {
+            duration = nil
+        }
+        
         let latitude = try values.decode(Double.self, forKey: .latitude)
         let longitude = try values.decode(Double.self, forKey: .longitude)
         coordinate = CLLocationCoordinate2DMake(latitude, longitude)
@@ -60,7 +73,11 @@ class VisitEvent: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(DateFormatter.iso8601.string(from: arrivalDate), forKey: .arrivalDate)
-        try container.encode(DateFormatter.iso8601.string(from: departureDate), forKey: .departureDate)
+        if let departureDateSafe = departureDate {
+            try container.encode(DateFormatter.iso8601.string(from: departureDateSafe), forKey: .departureDate)
+        } else {
+            try container.encode(departureDate, forKey: .departureDate)
+        }
         try container.encode(duration, forKey: .duration)
         try container.encode(coordinate.latitude, forKey: .latitude)
         try container.encode(coordinate.longitude, forKey: .longitude)
