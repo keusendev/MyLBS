@@ -20,6 +20,7 @@
 		7C87721C22BE70BB002811B2 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87721B22BE70BB002811B2 /* SettingsTableViewController.swift */; };
 		7C87721E22BE7679002811B2 /* MyLbsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87721D22BE7679002811B2 /* MyLbsSettings.swift */; };
 		7C87722022BFB292002811B2 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C87721F22BFB292002811B2 /* FileManager.swift */; };
+		7C8DC4C522D2997000F44E38 /* GeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8DC4C422D2997000F44E38 /* GeoPoint.swift */; };
 		7CBC534522C785CF00FDEBD5 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC534422C785CF00FDEBD5 /* Helpers.swift */; };
 		7CBC534922C79D8F00FDEBD5 /* Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC534822C79D8F00FDEBD5 /* Geofence.swift */; };
 		7CBC534B22C8ADC400FDEBD5 /* GeofencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC534A22C8ADC400FDEBD5 /* GeofencesTableViewController.swift */; };
@@ -60,6 +61,7 @@
 		7C87721B22BE70BB002811B2 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		7C87721D22BE7679002811B2 /* MyLbsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLbsSettings.swift; sourceTree = "<group>"; };
 		7C87721F22BFB292002811B2 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		7C8DC4C422D2997000F44E38 /* GeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
 		7CB305AF22CCE21B009DD3E4 /* Blinzern Sim.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Blinzern Sim.gpx"; sourceTree = "<group>"; };
 		7CB305B022CCE2E1009DD3E4 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = file; name = Location.gpx; path = ../Utilities/Location.gpx; sourceTree = "<group>"; };
 		7CB305B122CCFE7C009DD3E4 /* Blinzern2Wander.gpx */ = {isa = PBXFileReference; lastKnownFileType = file; name = Blinzern2Wander.gpx; path = ../Utilities/Blinzern2Wander.gpx; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				7CBC535322C923CA00FDEBD5 /* GeofenceEvent.swift */,
 				7CBC535722C9334600FDEBD5 /* EventType.swift */,
 				7CBC535B22C9470D00FDEBD5 /* EventClass.swift */,
+				7C8DC4C422D2997000F44E38 /* GeoPoint.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				7CBC535222C922A600FDEBD5 /* VisitEvent.swift in Sources */,
 				7C01074C22CABE69004CC6F6 /* PositionTableViewCell.swift in Sources */,
 				7C6089F922C76BFC00DF76EA /* AddGeofenceTableViewController.swift in Sources */,
+				7C8DC4C522D2997000F44E38 /* GeoPoint.swift in Sources */,
 				7CBC535C22C9470D00FDEBD5 /* EventClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
