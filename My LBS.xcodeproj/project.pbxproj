@@ -13,6 +13,9 @@
 		7C24019022DB71EF0051EDA7 /* ElasticsearchIndexName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24018F22DB71EF0051EDA7 /* ElasticsearchIndexName.swift */; };
 		7C24019222DB74DD0051EDA7 /* ElasticDocAddResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24019122DB74DD0051EDA7 /* ElasticDocAddResponse.swift */; };
 		7C24019422DB76110051EDA7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24019322DB76110051EDA7 /* Event.swift */; };
+		7C24019822DD17F60051EDA7 /* es_mapping_visitevent.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24019722DD17F60051EDA7 /* es_mapping_visitevent.json */; };
+		7C24019A22DD18400051EDA7 /* es_mapping_posevent.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24019922DD18400051EDA7 /* es_mapping_posevent.json */; };
+		7C24019C22DD18530051EDA7 /* es_mapping_geofenceevent.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C24019B22DD18530051EDA7 /* es_mapping_geofenceevent.json */; };
 		7C5E7D5F22C75CD400803508 /* GeofencingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E7D5E22C75CD400803508 /* GeofencingMapViewController.swift */; };
 		7C6089F922C76BFC00DF76EA /* AddGeofenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6089F822C76BFC00DF76EA /* AddGeofenceTableViewController.swift */; };
 		7C8771FA22BE6B6D002811B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8771F922BE6B6D002811B2 /* AppDelegate.swift */; };
@@ -53,6 +56,9 @@
 		7C24018F22DB71EF0051EDA7 /* ElasticsearchIndexName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticsearchIndexName.swift; sourceTree = "<group>"; };
 		7C24019122DB74DD0051EDA7 /* ElasticDocAddResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticDocAddResponse.swift; sourceTree = "<group>"; };
 		7C24019322DB76110051EDA7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		7C24019722DD17F60051EDA7 /* es_mapping_visitevent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = es_mapping_visitevent.json; sourceTree = "<group>"; };
+		7C24019922DD18400051EDA7 /* es_mapping_posevent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = es_mapping_posevent.json; sourceTree = "<group>"; };
+		7C24019B22DD18530051EDA7 /* es_mapping_geofenceevent.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = es_mapping_geofenceevent.json; sourceTree = "<group>"; };
 		7C5E7D5E22C75CD400803508 /* GeofencingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofencingMapViewController.swift; sourceTree = "<group>"; };
 		7C6089F822C76BFC00DF76EA /* AddGeofenceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGeofenceTableViewController.swift; sourceTree = "<group>"; };
 		7C8771F622BE6B6D002811B2 /* My LBS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My LBS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +185,9 @@
 				7CB305B022CCE2E1009DD3E4 /* Location.gpx */,
 				7CB305AF22CCE21B009DD3E4 /* Blinzern Sim.gpx */,
 				7CB305B822CD051C009DD3E4 /* Blinzert to Wander.gpx */,
+				7C24019722DD17F60051EDA7 /* es_mapping_visitevent.json */,
+				7C24019922DD18400051EDA7 /* es_mapping_posevent.json */,
+				7C24019B22DD18530051EDA7 /* es_mapping_geofenceevent.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -316,8 +325,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C87720622BE6B6E002811B2 /* LaunchScreen.storyboard in Resources */,
+				7C24019C22DD18530051EDA7 /* es_mapping_geofenceevent.json in Resources */,
 				7C87720322BE6B6E002811B2 /* Assets.xcassets in Resources */,
+				7C24019822DD17F60051EDA7 /* es_mapping_visitevent.json in Resources */,
 				7C87720122BE6B6D002811B2 /* Main.storyboard in Resources */,
+				7C24019A22DD18400051EDA7 /* es_mapping_posevent.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
