@@ -17,10 +17,7 @@ Further features:
 - Only low energy modes are used
 - User can select which modes should be used
 - Two user notification types (popup in-app and normal push notification)
-
-Next steps
-
-- Anything is now ready to push LBS infos to a server. In this case, I prefer Elasticsearch. Together with Kibana all the data can be easily analyzed then.
+- LBS infos canbe pushed to a server. In this case: Elasticsearch. Together with Kibana all the data can be easily analyzed then.
 
 ## Screen shots
 
