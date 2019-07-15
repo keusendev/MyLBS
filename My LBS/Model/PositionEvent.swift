@@ -9,15 +9,15 @@
 import Foundation
 import CoreLocation
 
-class PositionEvent: Codable {
-    
+class PositionEvent: Event, Codable {
+
     enum CodingKeys: String, CodingKey {
-        case name, arrivalDate, latitude, longitude, isUploaded, eventClassType, altitude, course, floor, horizontalAccuracy, verticalAccuracy, speed, addedDate
+        case name, arrivalDate, location, latitude, longitude, isUploaded, eventClassType, altitude, course, floor, horizontalAccuracy, verticalAccuracy, speed, addedDate, esid
     }
     
     var name: String
     var arrivalDate: Date
-    var coordinate: CLLocationCoordinate2D
+    var location: GeoPoint
     var isUploaded: Bool
     var eventClassType: EventClassType
     var altitude: CLLocationDistance
@@ -27,11 +27,12 @@ class PositionEvent: Codable {
     var verticalAccuracy: CLLocationAccuracy
     var speed: CLLocationSpeed
     var addedDate: Date
+    var esid: String
     
-    init(name: String, arrivalDate: Date, coordinate: CLLocationCoordinate2D, isUploaded: Bool = false, eventClassType: EventClassType = .positonEvent, altitude: CLLocationDistance, course: CLLocationDirection, floor: Int, horizontalAccuracy: CLLocationAccuracy, verticalAccuracy: CLLocationAccuracy, speed: CLLocationSpeed, addedDate: Date = Date()) {
+    init(name: String, arrivalDate: Date, coordinate: CLLocationCoordinate2D, isUploaded: Bool = false, eventClassType: EventClassType = .positonEvent, altitude: CLLocationDistance, course: CLLocationDirection, floor: Int, horizontalAccuracy: CLLocationAccuracy, verticalAccuracy: CLLocationAccuracy, speed: CLLocationSpeed, addedDate: Date = Date(), esid: String = "") {
         self.name = name
         self.arrivalDate = arrivalDate
-        self.coordinate = coordinate
+        self.location = GeoPoint(coordinate: coordinate)
         self.isUploaded = isUploaded
         self.eventClassType = eventClassType
         self.altitude = altitude
@@ -41,6 +42,11 @@ class PositionEvent: Codable {
         self.verticalAccuracy = verticalAccuracy
         self.speed = speed
         self.addedDate = addedDate
+        self.esid = esid
+    }
+    
+    func setEsid(esid: String) {
+        self.esid = esid
     }
     
     required init(from decoder: Decoder) throws {
@@ -49,7 +55,7 @@ class PositionEvent: Codable {
         arrivalDate = try dateStringDecode(forKey: .arrivalDate, from: values, with: .iso8601)
         let latitude = try values.decode(Double.self, forKey: .latitude)
         let longitude = try values.decode(Double.self, forKey: .longitude)
-        coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        location = GeoPoint(coordinate: CLLocationCoordinate2DMake(latitude, longitude))
         isUploaded = try values.decode(Bool.self, forKey: .isUploaded)
         let classType = try values.decode(String.self, forKey: .eventClassType)
         eventClassType = EventClassType(rawValue: classType) ?? .visitEvent
@@ -60,14 +66,16 @@ class PositionEvent: Codable {
         verticalAccuracy = try values.decode(CLLocationAccuracy.self, forKey: .verticalAccuracy)
         speed = try values.decode(CLLocationSpeed.self, forKey: .speed)
         addedDate = try dateStringDecode(forKey: .addedDate, from: values, with: .iso8601Milliseconds)
+        location = try values.decode(GeoPoint.self, forKey: .location)
+        esid = try values.decode(String.self, forKey: .esid)
+
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(DateFormatter.iso8601.string(from: arrivalDate), forKey: .arrivalDate)
-        try container.encode(coordinate.latitude, forKey: .latitude)
-        try container.encode(coordinate.longitude, forKey: .longitude)
+        try container.encode(location, forKey: .location)
         try container.encode(isUploaded, forKey: .isUploaded)
         try container.encode(eventClassType.rawValue, forKey: .eventClassType)
         try container.encode(altitude, forKey: .altitude)
@@ -77,6 +85,8 @@ class PositionEvent: Codable {
         try container.encode(verticalAccuracy, forKey: .verticalAccuracy)
         try container.encode(speed, forKey: .speed)
         try container.encode(DateFormatter.iso8601Milliseconds.string(from: addedDate), forKey: .addedDate)
+        try container.encode(esid, forKey: .esid)
+
     }
 }
 

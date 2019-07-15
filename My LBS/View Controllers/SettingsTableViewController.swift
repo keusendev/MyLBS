@@ -131,6 +131,10 @@ class SettingsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    @IBAction func uploadToElastic() {
+        modelController.startUploadToElastic()
+    }
+    
     // Option to enable/disable CLVisit tracking
     @IBAction func toggleVisitTrackingEnabled(_ sender: UISwitch) {
         visitTrackingSwitch.isOn = sender.isOn

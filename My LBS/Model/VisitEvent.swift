@@ -9,34 +9,40 @@
 import Foundation
 import CoreLocation
 
-class VisitEvent: Codable {
+class VisitEvent: Event, Codable {
     
     enum CodingKeys: String, CodingKey {
-        case name, arrivalDate, departureDate, duration, latitude, longitude, horizontalAccuracy, isUploaded, eventClassType, addedDate
+        case name, arrivalDate, departureDate, duration, location, latitude, longitude, horizontalAccuracy, isUploaded, eventClassType, addedDate, esid
     }
     
     var name: String
     var arrivalDate: Date
     var departureDate: Date?
     var duration: Double?
-    var coordinate: CLLocationCoordinate2D
+    var location: GeoPoint
     var horizontalAccuracy: CLLocationAccuracy
     var isUploaded: Bool
     var eventClassType: EventClassType
     var addedDate: Date
-
+    var esid: String
     
     
-    init(name: String, arrivalDate: Date, departureDate: Date?, duration: Double?, coordinate: CLLocationCoordinate2D, horizontalAccuracy: CLLocationAccuracy, isUploaded: Bool = false, eventClassType: EventClassType = .visitEvent, addedDate: Date = Date()) {
+    
+    init(name: String, arrivalDate: Date, departureDate: Date?, duration: Double?, coordinate: CLLocationCoordinate2D, horizontalAccuracy: CLLocationAccuracy, isUploaded: Bool = false, eventClassType: EventClassType = .visitEvent, addedDate: Date = Date(), esid: String = "") {
         self.name = name
         self.arrivalDate = arrivalDate
         self.departureDate = departureDate
         self.duration = duration
-        self.coordinate = coordinate
+        self.location = GeoPoint(coordinate: coordinate)
         self.horizontalAccuracy = horizontalAccuracy
         self.isUploaded = isUploaded
         self.eventClassType = eventClassType
         self.addedDate = addedDate
+        self.esid = esid
+    }
+    
+    func setEsid(esid: String) {
+        self.esid = esid
     }
     
     required init(from decoder: Decoder) throws {
@@ -60,13 +66,16 @@ class VisitEvent: Codable {
         
         let latitude = try values.decode(Double.self, forKey: .latitude)
         let longitude = try values.decode(Double.self, forKey: .longitude)
-        coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        location = GeoPoint(coordinate: CLLocationCoordinate2DMake(latitude, longitude))
+        location = try values.decode(GeoPoint.self, forKey: .location)
+        
         let horizontalAccuracyRaw = try values.decode(Double.self, forKey: .longitude)
         horizontalAccuracy = CLLocationAccuracy(horizontalAccuracyRaw)
         isUploaded = try values.decode(Bool.self, forKey: .isUploaded)
         let classType = try values.decode(String.self, forKey: .eventClassType)
         eventClassType = EventClassType(rawValue: classType) ?? .visitEvent
         addedDate = try dateStringDecode(forKey: .addedDate, from: values, with: .iso8601Milliseconds)
+        esid = try values.decode(String.self, forKey: .esid)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -79,12 +88,12 @@ class VisitEvent: Codable {
             try container.encode(departureDate, forKey: .departureDate)
         }
         try container.encode(duration, forKey: .duration)
-        try container.encode(coordinate.latitude, forKey: .latitude)
-        try container.encode(coordinate.longitude, forKey: .longitude)
+        try container.encode(location, forKey: .location)
         try container.encode(horizontalAccuracy.binade, forKey: .horizontalAccuracy)
         try container.encode(isUploaded, forKey: .isUploaded)
         try container.encode(eventClassType.rawValue, forKey: .eventClassType)
         try container.encode(DateFormatter.iso8601Milliseconds.string(from: addedDate), forKey: .addedDate)
+        try container.encode(esid, forKey: .esid)
     }
 }
 

@@ -10,6 +10,9 @@
 		7C01074822CA848E004CC6F6 /* PositionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01074722CA848E004CC6F6 /* PositionEvent.swift */; };
 		7C01074A22CABE59004CC6F6 /* VisitEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01074922CABE59004CC6F6 /* VisitEventTableViewCell.swift */; };
 		7C01074C22CABE69004CC6F6 /* PositionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01074B22CABE69004CC6F6 /* PositionTableViewCell.swift */; };
+		7C24019022DB71EF0051EDA7 /* ElasticsearchIndexName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24018F22DB71EF0051EDA7 /* ElasticsearchIndexName.swift */; };
+		7C24019222DB74DD0051EDA7 /* ElasticDocAddResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24019122DB74DD0051EDA7 /* ElasticDocAddResponse.swift */; };
+		7C24019422DB76110051EDA7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24019322DB76110051EDA7 /* Event.swift */; };
 		7C5E7D5F22C75CD400803508 /* GeofencingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5E7D5E22C75CD400803508 /* GeofencingMapViewController.swift */; };
 		7C6089F922C76BFC00DF76EA /* AddGeofenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6089F822C76BFC00DF76EA /* AddGeofenceTableViewController.swift */; };
 		7C8771FA22BE6B6D002811B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8771F922BE6B6D002811B2 /* AppDelegate.swift */; };
@@ -47,6 +50,9 @@
 		7C01074722CA848E004CC6F6 /* PositionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionEvent.swift; sourceTree = "<group>"; };
 		7C01074922CABE59004CC6F6 /* VisitEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitEventTableViewCell.swift; sourceTree = "<group>"; };
 		7C01074B22CABE69004CC6F6 /* PositionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionTableViewCell.swift; sourceTree = "<group>"; };
+		7C24018F22DB71EF0051EDA7 /* ElasticsearchIndexName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticsearchIndexName.swift; sourceTree = "<group>"; };
+		7C24019122DB74DD0051EDA7 /* ElasticDocAddResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticDocAddResponse.swift; sourceTree = "<group>"; };
+		7C24019322DB76110051EDA7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		7C5E7D5E22C75CD400803508 /* GeofencingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofencingMapViewController.swift; sourceTree = "<group>"; };
 		7C6089F822C76BFC00DF76EA /* AddGeofenceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGeofenceTableViewController.swift; sourceTree = "<group>"; };
 		7C8771F622BE6B6D002811B2 /* My LBS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My LBS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +203,9 @@
 				7CBC535722C9334600FDEBD5 /* EventType.swift */,
 				7CBC535B22C9470D00FDEBD5 /* EventClass.swift */,
 				7C8DC4C422D2997000F44E38 /* GeoPoint.swift */,
+				7C24018F22DB71EF0051EDA7 /* ElasticsearchIndexName.swift */,
+				7C24019122DB74DD0051EDA7 /* ElasticDocAddResponse.swift */,
+				7C24019322DB76110051EDA7 /* Event.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,18 +336,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C01074A22CABE59004CC6F6 /* VisitEventTableViewCell.swift in Sources */,
+				7C24019222DB74DD0051EDA7 /* ElasticDocAddResponse.swift in Sources */,
 				7CBC535822C9334600FDEBD5 /* EventType.swift in Sources */,
 				7CBC534922C79D8F00FDEBD5 /* Geofence.swift in Sources */,
 				7CBC534D22C8CF8A00FDEBD5 /* ModelController.swift in Sources */,
 				7C87721E22BE7679002811B2 /* MyLbsSettings.swift in Sources */,
 				7CBC534522C785CF00FDEBD5 /* Helpers.swift in Sources */,
 				7C01074822CA848E004CC6F6 /* PositionEvent.swift in Sources */,
+				7C24019422DB76110051EDA7 /* Event.swift in Sources */,
 				7C87721C22BE70BB002811B2 /* SettingsTableViewController.swift in Sources */,
 				7C8771FA22BE6B6D002811B2 /* AppDelegate.swift in Sources */,
 				7CBC534B22C8ADC400FDEBD5 /* GeofencesTableViewController.swift in Sources */,
 				7CBC535E22C959C300FDEBD5 /* GeofenceEventTableViewCell.swift in Sources */,
 				7CBC535A22C9345600FDEBD5 /* EventsTableViewController.swift in Sources */,
 				7C5E7D5F22C75CD400803508 /* GeofencingMapViewController.swift in Sources */,
+				7C24019022DB71EF0051EDA7 /* ElasticsearchIndexName.swift in Sources */,
 				7CBC535422C923CA00FDEBD5 /* GeofenceEvent.swift in Sources */,
 				7C87722022BFB292002811B2 /* FileManager.swift in Sources */,
 				7CBC535222C922A600FDEBD5 /* VisitEvent.swift in Sources */,

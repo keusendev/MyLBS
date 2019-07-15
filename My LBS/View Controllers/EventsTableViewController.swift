@@ -78,14 +78,7 @@ class EventsTableViewController: UITableViewController {
         }
         return title
     }
-    
-    // Round to three significant points for coordinates
-    func coordinaterFormatter(coordinate: CLLocationCoordinate2D) -> String {
-        let lat = coordinate.latitude
-        let lon = coordinate.longitude
-        return String(format: "lat: %.3f lon: %.3f", lat, lon)
-    }
-    
+
     // Table-Cell factory
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -106,7 +99,7 @@ class EventsTableViewController: UITableViewController {
                 geofenceEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(geofenceEvent.isUploaded)"
                 geofenceEventTableViewCell.typeLabel.text = "Type: \(geofenceEvent.eventType)"
                 geofenceEventTableViewCell.dateLabel.text = "Date: \(dateformatter.string(from: geofenceEvent.activityDate))"
-                geofenceEventTableViewCell.coordinateLabel.text = coordinaterFormatter(coordinate: geofenceEvent.coordinate)
+                geofenceEventTableViewCell.coordinateLabel.text = geofenceEvent.location.description
             }
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "VisitEventItem")!
@@ -128,7 +121,7 @@ class EventsTableViewController: UITableViewController {
                     visitEventTableViewCell.durationLabel.text = "Duration: n/a"
                 }
                 
-                visitEventTableViewCell.coordinateLabel.text = coordinaterFormatter(coordinate: visitEvent.coordinate)
+                visitEventTableViewCell.coordinateLabel.text = visitEvent.location.description
                 visitEventTableViewCell.horizontalAccuracyLabel.text = String(format: "Accuracy: %.1fm", visitEvent.horizontalAccuracy)
             }
         case 2:
@@ -142,7 +135,7 @@ class EventsTableViewController: UITableViewController {
                 positionEventTableViewCell.addedDateLabel.text = "Date added: \(dateformatterMs.string(from: posEvent.addedDate))"
                 positionEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(posEvent.isUploaded)"
                 positionEventTableViewCell.arrivalDateLabel.text = "Arrival: \(dateformatter.string(from: posEvent.arrivalDate))"
-                positionEventTableViewCell.coordinateLabel.text = coordinaterFormatter(coordinate: posEvent.coordinate)
+                positionEventTableViewCell.coordinateLabel.text = posEvent.location.description
                 positionEventTableViewCell.altitudeLabel.text = String(format: "Altitude: %.1fm", posEvent.altitude)
                 positionEventTableViewCell.courseLabel.text = String(format: "Course relative to North: %.0f°N", posEvent.course)
                 positionEventTableViewCell.floorLabel.text = "Floor in Building: \(posEvent.floor)"
@@ -156,6 +149,8 @@ class EventsTableViewController: UITableViewController {
                     speed_kmh = posEvent.speed * 3.6
                 }
                 positionEventTableViewCell.speedLabel.text = String(format: "Current speed: %.2fm/s (%.1fkm/h)", speed_mpers, speed_kmh)
+                
+                positionEventTableViewCell.esidLabel.text = "ES id: \(posEvent.esid)" 
             }
         default: break
         }

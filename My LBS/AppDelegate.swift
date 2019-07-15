@@ -210,9 +210,10 @@ extension AppDelegate: CLLocationManagerDelegate {
                                                      verticalAccuracy: loc.verticalAccuracy,
                                                      speed: loc.speed )
                 
+                modelController.postEventToElasticsearch(event: newPositionEvent)
                 modelController.positionEvents.insert(newPositionEvent, at: 0)
-                eventDelegate?.didReceiveNewEvent(eventClassType: .positonEvent)
                 modelController.savePositionEvents()
+                eventDelegate?.didReceiveNewEvent(eventClassType: .positonEvent)
                 counter += 1
             }
         }

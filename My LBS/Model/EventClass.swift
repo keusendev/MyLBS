@@ -17,4 +17,3 @@ enum EventClassType: String {
 protocol EventClass: Codable {
     func getEventClass() -> EventClassType
 }
-

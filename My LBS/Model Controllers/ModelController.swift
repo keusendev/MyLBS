@@ -134,4 +134,133 @@ class ModelController {
         positionEvents.removeAll()
         positionEvents = PositionEvent.readFromJson()
     }
+    
+    
+    
+    func syncToElasticsea() {
+        
+    }
+    
+    func uploadEventToElasticsearch(event: Event) {
+        
+        
+    }
+    
+    // MARK: Upload events
+    func startUploadToElastic() {
+        print("upload started")
+    }
+    
+    private func getJsonData(event: Event) -> Data? {
+        
+        let encoder = JSONEncoder()
+        
+        do {
+            if let geofenceEvent = event as? GeofenceEvent {
+                return try encoder.encode(geofenceEvent)
+            } else if let visitEvent = event as? VisitEvent {
+                return try encoder.encode(visitEvent)
+            } else if let posEvent = event as? PositionEvent {
+                return try encoder.encode(posEvent)
+            }
+        } catch {
+            print("Error info: \(error)")
+        }
+        return nil
+    }
+    
+    private func getEsIndex(event: Event) -> ElasticsearchIndexName? {
+        do {
+            if event is GeofenceEvent {
+                return .geofenceIndex
+            } else if event is VisitEvent {
+                return .visitIndex
+            } else if event is PositionEvent {
+                return .positionIndex
+            }
+            return nil
+        }
+        
+    }
+    
+    func postEventToElasticsearch(event: Event) {
+        
+        guard let esIndex = getEsIndex(event: event) else {
+            return
+        }
+        
+        guard var request = getRequestBody(forEsIndex: esIndex) else {
+            return
+        }
+        
+        guard let jsonData = getJsonData(event: event) else {
+            // exit func if jsonData is nil
+            return
+        }
+        
+        request.httpBody = jsonData
+        
+        let sessionConf = URLSessionConfiguration.ephemeral
+        sessionConf.allowsCellularAccess = true
+        sessionConf.waitsForConnectivity = true
+        
+        let session = URLSession(configuration: sessionConf)
+        
+        let task = session.dataTask(with: request) {
+            
+            (data, response, error) in
+            
+            guard let httpResponse = response as? HTTPURLResponse, (httpResponse.statusCode == 200 || httpResponse.statusCode == 201) else {
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                let esResponse = try decoder.decode(ElasticDocAddResponse.self, from: data!)
+                
+                if (esResponse.result == "created" || esResponse.result == "updated") {
+                    
+                    let queue = OperationQueue.main
+                    queue.addOperation {
+                        event.setEsid(esid: esResponse._id)
+                    }
+                } else {
+                    print(esResponse)
+                }
+            } catch {
+                print("Error info: \(error)")
+            }
+        }
+        task.resume()
+    }
+
+    private func areElasticParametersSet() -> Bool {
+        if ( !myLbsSettings.username.isEmpty && !myLbsSettings.password.isEmpty && !myLbsSettings.host.isEmpty) {
+            return true
+        }
+        return false
+    }
+    
+    private func getRequestBody(forEsIndex: ElasticsearchIndexName) -> URLRequest? {
+        
+        // Check if needed parametes for web request are set
+        guard areElasticParametersSet() else {
+            // exit if parameters are missing
+            return nil
+        }
+        
+        let loginString = "\(myLbsSettings.username):\(myLbsSettings.password)"
+        let loginData = loginString.data(using: .utf8)
+        let encodedString = loginData!.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+        
+        let url = URL(string: "https://\(myLbsSettings.host)/\(forEsIndex.rawValue)/_doc/")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "Post"
+        request.httpShouldHandleCookies = true
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Basic \(encodedString)", forHTTPHeaderField: "authorization")
+        
+        return request
+    }
 }
