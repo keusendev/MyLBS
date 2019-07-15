@@ -11,7 +11,7 @@ import CoreLocation
 
 
 
-class GeofenceEvent: Event, Codable {
+class GeofenceEvent: Codable {
        
     enum CodingKeys: String, CodingKey {
         case name, activityDate, eventType, location, latitude, longitude, isUploaded, eventClassType, addedDate, esid, device
@@ -39,9 +39,7 @@ class GeofenceEvent: Event, Codable {
         self.device = device
     }
     
-    func setEsid(esid: String) {
-        self.esid = esid
-    }
+
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -109,8 +107,16 @@ extension GeofenceEvent {
     }
 }
 
-extension GeofenceEvent: EventClass {
-    func getEventClass() -> EventClassType {
+extension GeofenceEvent: Event {
+    func setEsid(esid: String) {
+        self.esid = esid
+    }
+    
+    func getEsid() -> String {
+        return esid
+    }
+    
+    func getEventClassType() -> EventClassType {
         return eventClassType
     }
 }

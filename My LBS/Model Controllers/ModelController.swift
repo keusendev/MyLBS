@@ -136,19 +136,26 @@ class ModelController {
     }
     
     
-    
-    func syncToElasticsea() {
-        
-    }
-    
-    func uploadEventToElasticsearch(event: Event) {
-        
-        
-    }
-    
     // MARK: Upload events
     func startSyncToElastic() {
-        print("upload started")
+        
+        let alwaysPush = false
+        
+        for posEvent in positionEvents {
+            if posEvent.esid.isEmpty || alwaysPush {
+                postEventToElasticsearch(event: posEvent)
+            }
+        }
+        for geofence in geofenceEvents {
+            if geofence.esid.isEmpty || alwaysPush {
+                postEventToElasticsearch(event: geofence)
+            }
+        }
+        for visitEvent in visitEvents {
+            if visitEvent.esid.isEmpty || alwaysPush {
+                postEventToElasticsearch(event: visitEvent)
+            }
+        }
     }
     
     private func getJsonData(event: Event) -> Data? {
@@ -189,7 +196,7 @@ class ModelController {
             return
         }
         
-        guard var request = getRequestBody(forEsIndex: esIndex) else {
+        guard var request = getRequestBody(forEsIndex: esIndex, esid: event.getEsid()) else {
             return
         }
         
@@ -222,6 +229,7 @@ class ModelController {
                     let queue = OperationQueue.main
                     queue.addOperation {
                         event.setEsid(esid: esResponse._id)
+                        self.saveEventArrayToDisk(forEventClass: event.getEventClassType())
                     }
                 } else {
                     print(esResponse)
@@ -232,7 +240,7 @@ class ModelController {
         }
         task.resume()
     }
-
+    
     private func areElasticParametersSet() -> Bool {
         if ( !myLbsSettings.username.isEmpty && !myLbsSettings.password.isEmpty && !myLbsSettings.host.isEmpty) {
             return true
@@ -240,7 +248,18 @@ class ModelController {
         return false
     }
     
-    private func getRequestBody(forEsIndex: ElasticsearchIndexName) -> URLRequest? {
+    private func saveEventArrayToDisk(forEventClass: EventClassType) {
+        switch forEventClass {
+        case .geofenceEvent:
+            saveGeofenceEvents()
+        case .visitEvent:
+            saveVisitEvents()
+        case .positonEvent:
+            savePositionEvents()
+        }
+    }
+    
+    private func getRequestBody(forEsIndex: ElasticsearchIndexName, esid: String) -> URLRequest? {
         
         // Check if needed parametes for web request are set
         guard areElasticParametersSet() else {
@@ -252,7 +271,11 @@ class ModelController {
         let loginData = loginString.data(using: .utf8)
         let encodedString = loginData!.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
         
-        let url = URL(string: "https://\(myLbsSettings.host)/\(forEsIndex.rawValue)/_doc/")!
+        var url = URL(string: "https://\(myLbsSettings.host)/\(forEsIndex.rawValue)/_doc/")!
+        
+        if !esid.isEmpty  {
+            url = URL(string: "https://\(myLbsSettings.host)/\(forEsIndex.rawValue)/_doc/\(esid)")!
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = "Post"

@@ -14,6 +14,3 @@ enum EventClassType: String {
     case positonEvent = "Position Event"
 }
 
-protocol EventClass: Codable {
-    func getEventClass() -> EventClassType
-}

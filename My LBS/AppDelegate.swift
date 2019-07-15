@@ -138,6 +138,7 @@ extension AppDelegate {
         
         guard let activeFence = activatedFence(from: region.identifier) else { return }
         let newGeofenceEvent = GeofenceEvent(name: activeFence.note, activityDate: Date(), coordinate: activeFence.coordinate, eventType: activeFence.eventType, device: modelController.myLbsSettings.deviceId)
+        modelController.postEventToElasticsearch(event: newGeofenceEvent)
         modelController.geofenceEvents.insert(newGeofenceEvent, at: 0)
         eventDelegate?.didReceiveNewEvent(eventClassType: .geofenceEvent)
         modelController.saveGeofenceEvents()
@@ -250,6 +251,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         let dateformatter = DateFormatter.iso8601
         let message = "New visit: \(dateformatter.string(from: newVisitEvent.arrivalDate))"
         notify(message: message, allowInAppInfo: true)
+        modelController.postEventToElasticsearch(event: newVisitEvent)
         modelController.visitEvents.insert(newVisitEvent, at: 0)
         eventDelegate?.didReceiveNewEvent(eventClassType: .visitEvent)
         modelController.saveVisitEvents()

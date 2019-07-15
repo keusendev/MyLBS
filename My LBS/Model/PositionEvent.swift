@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-class PositionEvent: Event, Codable {
+class PositionEvent: Codable {
 
     enum CodingKeys: String, CodingKey {
         case name, arrivalDate, location, latitude, longitude, isUploaded, eventClassType, altitude, course, floor, horizontalAccuracy, verticalAccuracy, speed, addedDate, esid, device
@@ -48,9 +48,7 @@ class PositionEvent: Event, Codable {
         self.device = device
     }
     
-    func setEsid(esid: String) {
-        self.esid = esid
-    }
+
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -132,8 +130,16 @@ extension PositionEvent {
     }
 }
 
-extension PositionEvent: EventClass {
-    func getEventClass() -> EventClassType {
+extension PositionEvent: Event {
+    func setEsid(esid: String) {
+        self.esid = esid
+    }
+    
+    func getEsid() -> String {
+        return esid
+    }
+    
+    func getEventClassType() -> EventClassType {
         return eventClassType
     }
 }

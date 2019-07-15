@@ -10,4 +10,8 @@ import Foundation
 
 protocol Event {
     func setEsid(esid: String)
+    
+    func getEsid() -> String
+    
+    func getEventClassType() -> EventClassType
 }
