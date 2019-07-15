@@ -60,6 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         modelController.readPositionEvents()
         activateSettings()
         
+//        modelController.saveVisitEvents()
+//        modelController.saveGeofenceEvents()
+//        modelController.savePositionEvents()
+        
         return true
     }
     
@@ -133,8 +137,9 @@ extension AppDelegate {
         notify(message: body, allowInAppInfo: true)
         
         guard let activeFence = activatedFence(from: region.identifier) else { return }
-        let geofenceEvent = GeofenceEvent(name: activeFence.note, activityDate: Date(), coordinate: activeFence.coordinate, eventType: activeFence.eventType)
-        modelController.geofenceEvents.insert(geofenceEvent, at: 0)
+        let newGeofenceEvent = GeofenceEvent(name: activeFence.note, activityDate: Date(), coordinate: activeFence.coordinate, eventType: activeFence.eventType, device: modelController.myLbsSettings.deviceId)
+        modelController.postEventToElasticsearch(event: newGeofenceEvent)
+        modelController.geofenceEvents.insert(newGeofenceEvent, at: 0)
         eventDelegate?.didReceiveNewEvent(eventClassType: .geofenceEvent)
         modelController.saveGeofenceEvents()
     }
@@ -208,11 +213,13 @@ extension AppDelegate: CLLocationManagerDelegate {
                                                      floor: loc.floor?.level ?? 0,
                                                      horizontalAccuracy: loc.horizontalAccuracy,
                                                      verticalAccuracy: loc.verticalAccuracy,
-                                                     speed: loc.speed )
+                                                     speed: loc.speed,
+                                                     device: modelController.myLbsSettings.deviceId)
                 
+                modelController.postEventToElasticsearch(event: newPositionEvent)
                 modelController.positionEvents.insert(newPositionEvent, at: 0)
-                eventDelegate?.didReceiveNewEvent(eventClassType: .positonEvent)
                 modelController.savePositionEvents()
+                eventDelegate?.didReceiveNewEvent(eventClassType: .positonEvent)
                 counter += 1
             }
         }
@@ -238,11 +245,13 @@ extension AppDelegate: CLLocationManagerDelegate {
                                        departureDate: departureDate,
                                        duration: duration,
                                        coordinate: visit.coordinate,
-                                       horizontalAccuracy: visit.horizontalAccuracy)
+                                       horizontalAccuracy: visit.horizontalAccuracy,
+                                       device: modelController.myLbsSettings.deviceId)
         
         let dateformatter = DateFormatter.iso8601
         let message = "New visit: \(dateformatter.string(from: newVisitEvent.arrivalDate))"
         notify(message: message, allowInAppInfo: true)
+        modelController.postEventToElasticsearch(event: newVisitEvent)
         modelController.visitEvents.insert(newVisitEvent, at: 0)
         eventDelegate?.didReceiveNewEvent(eventClassType: .visitEvent)
         modelController.saveVisitEvents()

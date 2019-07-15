@@ -9,13 +9,17 @@
 import Foundation
 import CoreLocation
 
-class GeoPoint: Codable {
+class GeoPoint: Codable, CustomStringConvertible {
     
     enum CodingKeys: String, CodingKey {
         case lat, lon
     }
+    
     var latitude: Double
     var longitude: Double
+    var description: String {
+        return String(format: "lat: %.3f lon: %.3f", latitude, longitude)
+    }
     
     init(coordinate: CLLocationCoordinate2D) {
         self.latitude = coordinate.latitude

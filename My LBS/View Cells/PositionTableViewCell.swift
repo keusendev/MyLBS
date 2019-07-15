@@ -21,5 +21,6 @@ class PositionTableViewCell: UITableViewCell {
     @IBOutlet weak var verticalAccuracyLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var addedDateLabel: UILabel!
-
+    @IBOutlet weak var esidLabel: UILabel!
+    
 }

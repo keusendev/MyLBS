@@ -1,0 +1,67 @@
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 1
+    },
+    "mappings": {
+        "properties": {
+            "name": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 200
+                    }
+                }
+            },
+            "esid": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 200
+                    }
+                }
+            },
+            "device": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 200
+                    }
+                }
+            },
+            "eventClassType": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 200
+                    }
+                }
+            },
+            "location": {
+                "type": "geo_point"
+            },
+            "horizontalAccuracy": {
+                "type": "double"
+            },
+            "isUploaded": {
+                "type": "boolean"
+            },
+            "departureDate": {
+                "type": "date"
+            },
+            "addedDate": {
+                "type": "date"
+            },
+            "arrivalDate": {
+                "type": "date"
+            },
+            "duration": {
+                "type": "double"
+            }
+        }
+    }
+}
