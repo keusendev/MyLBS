@@ -14,7 +14,16 @@
                     }
                 }
             },
-            "eventType": {
+            "esid": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 200
+                    }
+                }
+            },
+            "device": {
                 "type": "text",
                 "fields": {
                     "keyword": {
@@ -35,14 +44,23 @@
             "location": {
                 "type": "geo_point"
             },
+            "horizontalAccuracy": {
+                "type": "double"
+            },
             "isUploaded": {
                 "type": "boolean"
+            },
+            "departureDate": {
+                "type": "date"
             },
             "addedDate": {
                 "type": "date"
             },
-            "activityDate": {
+            "arrivalDate": {
                 "type": "date"
+            },
+            "duration": {
+                "type": "double"
             }
         }
     }

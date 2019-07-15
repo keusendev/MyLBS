@@ -14,15 +14,6 @@
                     }
                 }
             },
-            "eventType": {
-                "type": "text",
-                "fields": {
-                    "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 200
-                    }
-                }
-            },
             "eventClassType": {
                 "type": "text",
                 "fields": {
@@ -38,11 +29,47 @@
             "isUploaded": {
                 "type": "boolean"
             },
+            "arrivalDate": {
+                "type": "date"
+            },
             "addedDate": {
                 "type": "date"
             },
-            "activityDate": {
-                "type": "date"
+            "speed": {
+                "type": "double"
+            },
+            "verticalAccuracy": {
+                "type": "double"
+            },
+            "esid": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 200
+                    }
+                }
+            },
+            "course": {
+                "type": "double"
+            },
+            "floor": {
+                "type": "short"
+            },
+            "altitude": {
+                "type": "double"
+            },
+            "device": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 200
+                    }
+                }
+            },
+            "horizontalAccuracy": {
+                "type": "double"
             }
         }
     }
