@@ -60,6 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         modelController.readPositionEvents()
         activateSettings()
         
+//        modelController.saveVisitEvents()
+//        modelController.saveGeofenceEvents()
+//        modelController.savePositionEvents()
+        
         return true
     }
     

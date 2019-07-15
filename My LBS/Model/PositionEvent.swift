@@ -53,9 +53,6 @@ class PositionEvent: Event, Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         arrivalDate = try dateStringDecode(forKey: .arrivalDate, from: values, with: .iso8601)
-        let latitude = try values.decode(Double.self, forKey: .latitude)
-        let longitude = try values.decode(Double.self, forKey: .longitude)
-        location = GeoPoint(coordinate: CLLocationCoordinate2DMake(latitude, longitude))
         isUploaded = try values.decode(Bool.self, forKey: .isUploaded)
         let classType = try values.decode(String.self, forKey: .eventClassType)
         eventClassType = EventClassType(rawValue: classType) ?? .visitEvent
@@ -66,8 +63,20 @@ class PositionEvent: Event, Codable {
         verticalAccuracy = try values.decode(CLLocationAccuracy.self, forKey: .verticalAccuracy)
         speed = try values.decode(CLLocationSpeed.self, forKey: .speed)
         addedDate = try dateStringDecode(forKey: .addedDate, from: values, with: .iso8601Milliseconds)
-        location = try values.decode(GeoPoint.self, forKey: .location)
-        esid = try values.decode(String.self, forKey: .esid)
+
+        do {
+            location = try values.decode(GeoPoint.self, forKey: .location)
+        } catch {
+            let latitude = try values.decode(Double.self, forKey: .latitude)
+            let longitude = try values.decode(Double.self, forKey: .longitude)
+            location = GeoPoint(coordinate: CLLocationCoordinate2DMake(latitude, longitude))
+        }
+        
+        do {
+            esid = try values.decode(String.self, forKey: .esid)
+        } catch {
+            esid = ""
+        }
 
     }
     

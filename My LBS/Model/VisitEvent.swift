@@ -64,10 +64,13 @@ class VisitEvent: Event, Codable {
             duration = nil
         }
         
-        let latitude = try values.decode(Double.self, forKey: .latitude)
-        let longitude = try values.decode(Double.self, forKey: .longitude)
-        location = GeoPoint(coordinate: CLLocationCoordinate2DMake(latitude, longitude))
-        location = try values.decode(GeoPoint.self, forKey: .location)
+        do {
+            location = try values.decode(GeoPoint.self, forKey: .location)
+        } catch {
+            let latitude = try values.decode(Double.self, forKey: .latitude)
+            let longitude = try values.decode(Double.self, forKey: .longitude)
+            location = GeoPoint(coordinate: CLLocationCoordinate2DMake(latitude, longitude))
+        }
         
         let horizontalAccuracyRaw = try values.decode(Double.self, forKey: .longitude)
         horizontalAccuracy = CLLocationAccuracy(horizontalAccuracyRaw)
@@ -75,7 +78,11 @@ class VisitEvent: Event, Codable {
         let classType = try values.decode(String.self, forKey: .eventClassType)
         eventClassType = EventClassType(rawValue: classType) ?? .visitEvent
         addedDate = try dateStringDecode(forKey: .addedDate, from: values, with: .iso8601Milliseconds)
-        esid = try values.decode(String.self, forKey: .esid)
+        do {
+            esid = try values.decode(String.self, forKey: .esid)
+        } catch {
+            esid = ""
+        }
     }
     
     func encode(to encoder: Encoder) throws {
