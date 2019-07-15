@@ -18,5 +18,6 @@ class VisitEventTableViewCell: UITableViewCell {
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var horizontalAccuracyLabel: UILabel!
     @IBOutlet weak var addedDateLabel: UILabel!
+    @IBOutlet weak var esidLabel: UILabel!
 
 }

@@ -16,5 +16,5 @@ class GeofenceEventTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var addedDateLabel: UILabel!
-
+    @IBOutlet weak var esidLabel: UILabel!
 }

@@ -14,7 +14,7 @@ import CoreLocation
 class GeofenceEvent: Event, Codable {
        
     enum CodingKeys: String, CodingKey {
-        case name, activityDate, eventType, location, latitude, longitude, isUploaded, eventClassType, addedDate, esid
+        case name, activityDate, eventType, location, latitude, longitude, isUploaded, eventClassType, addedDate, esid, device
     }
     
     var name: String
@@ -25,8 +25,9 @@ class GeofenceEvent: Event, Codable {
     var eventClassType: EventClassType
     var addedDate: Date
     var esid: String
-    
-    init(name: String, activityDate: Date, coordinate: CLLocationCoordinate2D, eventType: EventType, isUploaded: Bool = false, eventClassType: EventClassType = .geofenceEvent, addedDate: Date = Date(), esid: String = "") {
+    var device: String
+
+    init(name: String, activityDate: Date, coordinate: CLLocationCoordinate2D, eventType: EventType, isUploaded: Bool = false, eventClassType: EventClassType = .geofenceEvent, addedDate: Date = Date(), esid: String = "", device: String = "") {
         self.name = name
         self.activityDate = activityDate
         self.location = GeoPoint(coordinate: coordinate)
@@ -35,6 +36,7 @@ class GeofenceEvent: Event, Codable {
         self.eventClassType = eventClassType
         self.addedDate = addedDate
         self.esid = esid
+        self.device = device
     }
     
     func setEsid(esid: String) {
@@ -65,6 +67,12 @@ class GeofenceEvent: Event, Codable {
         } catch {
             esid = ""
         }
+        
+        do {
+            device = try values.decode(String.self, forKey: .device)
+        } catch {
+            device = ""
+        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -77,6 +85,7 @@ class GeofenceEvent: Event, Codable {
         try container.encode(eventClassType.rawValue, forKey: .eventClassType)
         try container.encode(DateFormatter.iso8601Milliseconds.string(from: addedDate), forKey: .addedDate)
         try container.encode(esid, forKey: .esid)
+        try container.encode(device, forKey: .device)
     }
 }
 

@@ -12,7 +12,7 @@ import CoreLocation
 class PositionEvent: Event, Codable {
 
     enum CodingKeys: String, CodingKey {
-        case name, arrivalDate, location, latitude, longitude, isUploaded, eventClassType, altitude, course, floor, horizontalAccuracy, verticalAccuracy, speed, addedDate, esid
+        case name, arrivalDate, location, latitude, longitude, isUploaded, eventClassType, altitude, course, floor, horizontalAccuracy, verticalAccuracy, speed, addedDate, esid, device
     }
     
     var name: String
@@ -28,8 +28,10 @@ class PositionEvent: Event, Codable {
     var speed: CLLocationSpeed
     var addedDate: Date
     var esid: String
+    var device: String
+
     
-    init(name: String, arrivalDate: Date, coordinate: CLLocationCoordinate2D, isUploaded: Bool = false, eventClassType: EventClassType = .positonEvent, altitude: CLLocationDistance, course: CLLocationDirection, floor: Int, horizontalAccuracy: CLLocationAccuracy, verticalAccuracy: CLLocationAccuracy, speed: CLLocationSpeed, addedDate: Date = Date(), esid: String = "") {
+    init(name: String, arrivalDate: Date, coordinate: CLLocationCoordinate2D, isUploaded: Bool = false, eventClassType: EventClassType = .positonEvent, altitude: CLLocationDistance, course: CLLocationDirection, floor: Int, horizontalAccuracy: CLLocationAccuracy, verticalAccuracy: CLLocationAccuracy, speed: CLLocationSpeed, addedDate: Date = Date(), esid: String = "", device: String = "") {
         self.name = name
         self.arrivalDate = arrivalDate
         self.location = GeoPoint(coordinate: coordinate)
@@ -43,6 +45,7 @@ class PositionEvent: Event, Codable {
         self.speed = speed
         self.addedDate = addedDate
         self.esid = esid
+        self.device = device
     }
     
     func setEsid(esid: String) {
@@ -77,6 +80,12 @@ class PositionEvent: Event, Codable {
         } catch {
             esid = ""
         }
+        
+        do {
+            device = try values.decode(String.self, forKey: .device)
+        } catch {
+            device = ""
+        }
 
     }
     
@@ -95,7 +104,7 @@ class PositionEvent: Event, Codable {
         try container.encode(speed, forKey: .speed)
         try container.encode(DateFormatter.iso8601Milliseconds.string(from: addedDate), forKey: .addedDate)
         try container.encode(esid, forKey: .esid)
-
+        try container.encode(device, forKey: .device)
     }
 }
 
@@ -109,10 +118,14 @@ extension PositionEvent {
             let savedData = try Data(contentsOf: fileURL)
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            if let savedVisitEvents = try? decoder.decode(Array.self, from: savedData) as [PositionEvent] {
-                return savedVisitEvents
+            
+            do {
+                return try decoder.decode(Array.self, from: savedData) as [PositionEvent]
+            } catch {
+                print(error)
             }
         } catch {
+            print(error)
             return []
         }
         return []

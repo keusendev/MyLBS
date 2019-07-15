@@ -147,7 +147,7 @@ class ModelController {
     }
     
     // MARK: Upload events
-    func startUploadToElastic() {
+    func startSyncToElastic() {
         print("upload started")
     }
     

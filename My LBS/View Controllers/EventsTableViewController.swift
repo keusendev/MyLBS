@@ -95,6 +95,7 @@ class EventsTableViewController: UITableViewController {
             if let geofenceEventTableViewCell = cell as? GeofenceEventTableViewCell {
                 
                 geofenceEventTableViewCell.noteLabel.text = geofenceEvent.name
+                geofenceEventTableViewCell.esidLabel.text = "ES id: \(geofenceEvent.esid)"
                 geofenceEventTableViewCell.addedDateLabel.text = "Date added: \(dateformatterMs.string(from: geofenceEvent.addedDate))"
                 geofenceEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(geofenceEvent.isUploaded)"
                 geofenceEventTableViewCell.typeLabel.text = "Type: \(geofenceEvent.eventType)"
@@ -109,6 +110,7 @@ class EventsTableViewController: UITableViewController {
             if let visitEventTableViewCell = cell as? VisitEventTableViewCell {
                 
                 visitEventTableViewCell.nameLabel.text = visitEvent.name
+                visitEventTableViewCell.esidLabel.text = "ES id: \(visitEvent.esid)"
                 visitEventTableViewCell.addedDateLabel.text = "Date added: \(dateformatterMs.string(from: visitEvent.addedDate))"
                 visitEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(visitEvent.isUploaded)"
                 visitEventTableViewCell.arrivalDateLabel.text = "Arrival: \(dateformatter.string(from: visitEvent.arrivalDate))"
@@ -132,6 +134,7 @@ class EventsTableViewController: UITableViewController {
             if let positionEventTableViewCell = cell as? PositionTableViewCell {
                 
                 positionEventTableViewCell.nameLabel.text = posEvent.name
+                positionEventTableViewCell.esidLabel.text = "ES id: \(posEvent.esid)"
                 positionEventTableViewCell.addedDateLabel.text = "Date added: \(dateformatterMs.string(from: posEvent.addedDate))"
                 positionEventTableViewCell.isUploadedLabel.text = "Uploaded to server: \(posEvent.isUploaded)"
                 positionEventTableViewCell.arrivalDateLabel.text = "Arrival: \(dateformatter.string(from: posEvent.arrivalDate))"
@@ -149,8 +152,6 @@ class EventsTableViewController: UITableViewController {
                     speed_kmh = posEvent.speed * 3.6
                 }
                 positionEventTableViewCell.speedLabel.text = String(format: "Current speed: %.2fm/s (%.1fkm/h)", speed_mpers, speed_kmh)
-                
-                positionEventTableViewCell.esidLabel.text = "ES id: \(posEvent.esid)" 
             }
         default: break
         }

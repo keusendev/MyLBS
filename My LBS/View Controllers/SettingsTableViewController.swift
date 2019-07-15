@@ -131,8 +131,8 @@ class SettingsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    @IBAction func uploadToElastic() {
-        modelController.startUploadToElastic()
+    @IBAction func syncToElastic() {
+        modelController.startSyncToElastic()
     }
     
     // Option to enable/disable CLVisit tracking
