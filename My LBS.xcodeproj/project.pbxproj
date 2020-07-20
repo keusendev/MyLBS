@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -88,6 +88,7 @@
 		7CBC535922C9345600FDEBD5 /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
 		7CBC535B22C9470D00FDEBD5 /* EventClassType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventClassType.swift; sourceTree = "<group>"; };
 		7CBC535D22C959C300FDEBD5 /* GeofenceEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceEventTableViewCell.swift; sourceTree = "<group>"; };
+		7CF5C1E524C5A72A005BCE9A /* My LBS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "My LBS.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +130,7 @@
 		7C8771F822BE6B6D002811B2 /* My LBS */ = {
 			isa = PBXGroup;
 			children = (
+				7CF5C1E524C5A72A005BCE9A /* My LBS.entitlements */,
 				7C8771F922BE6B6D002811B2 /* AppDelegate.swift */,
 				7CBC534E22C8E18000FDEBD5 /* Model */,
 				7C8DC49922D1E71A00F44E38 /* Model Controllers */,
@@ -301,7 +303,7 @@
 				};
 			};
 			buildConfigurationList = 7C8771F122BE6B6D002811B2 /* Build configuration list for PBXProject "My LBS" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -531,17 +533,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "My LBS/My LBS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4F5TM3DGF2;
 				INFOPLIST_FILE = "$(SRCROOT)/My LBS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.keusen.My-LBS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -549,17 +554,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "My LBS/My LBS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4F5TM3DGF2;
 				INFOPLIST_FILE = "$(SRCROOT)/My LBS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.keusen.My-LBS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
