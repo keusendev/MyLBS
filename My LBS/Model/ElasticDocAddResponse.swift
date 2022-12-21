@@ -10,7 +10,7 @@ import Foundation
 
 struct ElasticDocAddResponse: Codable {
     let _index: String
-    let _type: String
+    // let _type: String
     let _id: String
     let _version: Int
     let result: String
